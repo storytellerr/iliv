@@ -10,10 +10,10 @@ import { DoctorInfoComponent } from './doctor-info/doctor-info.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment.prod';
-import { AuthGuard} from './core-modules/auth.guard';
 import { AuthServiceService } from './core-modules/auth-service.service';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import {  HttpClientJsonpModule } from '@angular/common/http';
 
 
 
@@ -33,6 +33,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFireAuthModule,
     AngularFirestoreModule,
     NgbModule.forRoot(),
+    HttpClientJsonpModule,
   ],
   providers: [AuthServiceService],
   bootstrap: [AppComponent]

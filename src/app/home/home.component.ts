@@ -14,7 +14,6 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  title = 'app';
   results = '';
   username;
   isadmin=false;
@@ -25,6 +24,7 @@ export class HomeComponent implements OnInit {
   money;
   hospitalId;
   doctorId;
+  loading;
  
   
 
@@ -55,15 +55,22 @@ export class HomeComponent implements OnInit {
     let getHeaders: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    var preuri='https://qa-api.medicalme.in/discovery/search?searchTerm='
-    var posturi='&entityTypes=DOCTOR'
+    var preuri='https://cors.io/?https://qa-api.medicalme.in/discovery/search?searchTerm=';
+    var posturi='&entityTypes=DOCTOR';
     var output = [preuri, value, posturi].join('');
-    this.http.get(output).subscribe(data => {
-
-      //var res = JSON.parse(data);
-      this.results=data.result.sections[0].entities;
-     // console.log(data.result.sections[0].entities);
+    this.http.get(output).subscribe((dataa:any) => {
+      this.results=dataa.result.sections[0].entities;
+      console.log(dataa.result.sections[0].entities);
     });
+    //  this.http.jsonp(output, 'callback').subscribe((response: any) => {
+    //     if (response.result && response.result !== 'error') {
+    //       console.log(response);	}
+    //       else {
+		// 			console.log(response)
+		// 		}
+		// 	}, error => {
+		// 		console.error(error);
+		// 	});
  }
  openVerticallyCentered(title,description,score,money,hospitalId,doctorId,content) {
    if(this.isadmin){
