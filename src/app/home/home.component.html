@@ -1,0 +1,88 @@
+<p class="textmiddle">
+    welcome {{username}}
+</p>
+
+<div class="row">
+
+    <div class="search col-sm-6">
+        <input type="text" class="searchTerm" placeholder="What are you looking for?" #Input>
+        <button type="submit" class="searchButton" (click)="getdata(Input.value)">
+        <img class="imgg" src="assets/search.svg">
+     </button>
+    </div>
+</div>
+<div>
+    <div class="row inline">
+        <div class=" row listtogrid">
+            <h5>list</h5><label class="switch"><input ng-model="listview" type="checkbox" (change)="listToGrid()" checked>
+            <span class="slider round"></span>
+            </label>
+            <h5>Grid </h5>
+        </div>
+    </div>
+    <ul>
+        <li class=" thumbnail" *ngFor="let item of results">
+            <div class="card" (click)="openVerticallyCentered(item.title,item.description,item.score,item.hintText,item.queryMap.hospitalId,item.pathMap.doctorId,content)">
+                <div class="container">
+                    <h6><b>{{item.title}}</b></h6>
+                    {{item.description}}
+                    <div class="row inline">
+                        <!--<div [hidden]="!item.resultType" class="redBox">{{item.resultType}}</div>-->
+                        <div [hidden]="!item.score" class="greenBox">Score-{{item.score}}</div>
+                    </div>
+                    <div class="row inline">
+                        <div [hidden]="!item.hintText" class="brownBox">Money-{{item.hintText}}</div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <!--//<h4 class="modal-title">{{title}}</h4>-->
+        <h5>Name-</h5><input class="bottomBorder" value="{{title}}">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+               <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <h5>Discription-
+                    </h5>
+                </td>
+                <td><input class="bottomBorder" value="{{description}}"></td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>Money-</h5>
+                </td>
+                <td><input class="bottomBorder" value="{{money}}"> </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>Score-</h5>
+                </td>
+                <td><input class="bottomBorder" value="{{score}}"></td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>Doctor ID-</h5>
+                </td>
+                <td><input class="bottomBorder" value="{{doctorId}}"></td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>Hospital ID-</h5>
+                </td>
+                <td><input class="bottomBorder" value="{{hospitalId}}"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-light">Save Changes</button>
+    </div>
+</ng-template>
